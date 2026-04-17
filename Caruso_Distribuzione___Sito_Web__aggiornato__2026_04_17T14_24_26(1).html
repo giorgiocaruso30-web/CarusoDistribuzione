@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caruso Distribuzione - Ingrosso Alimentare</title>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7f9;
+    color: #222;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header img {
+    height: 65px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.2s;
+  }
+
+  .btn:hover { background: #1ebe5a; }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    margin-right: 10px;
+  }
+
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 110px 20px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55));
+    z-index: 1;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .hero p {
+    font-size: 19px;
+    margin-bottom: 8px;
+    opacity: 0.92;
+  }
+
+  .hero .sub {
+    font-size: 15px;
+    opacity: 0.75;
+    margin-bottom: 30px;
+  }
+
+  .hero-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+  /* ── SEZIONI GENERALI ── */
+  .section {
+    padding: 70px 20px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #1a3a4a;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 16px;
+  }
+
+  /* ── CHI SIAMO ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .about-grid img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  .about-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 40px;
+  }
+
+  .about-logo img {
+    width: 100%;
+    max-width: 320px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .about-text h3 {
+    font-size: 22px;
+    color: #1a3a4a;
+    margin-bottom: 14px;
+  }
+
+  .about-text p {
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* ── PERCHÉ NOI ── */
+  .why-section {
+    background: white;
+    padding: 70px 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  .card {
+    background: #f9fbfc;
+    padding: 30px 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border-top: 4px solid #0e7490;
+  }
+
+  .card .icon { font-size: 36px; margin-bottom: 14px; }
+  .card h3 { font-size: 17px; color: #1a3a4a; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: #555; line-height: 1.6; }
+
+  /* ── CATALOGO ── */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+  }
+
+  .cat-card {
+    background: white;
+    padding: 20px 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+  }
+
+  .cat-card:hover { transform: translateY(-4px); }
+  .cat-card .cat-icon { font-size: 38px; margin-bottom: 10px; }
+  .cat-card p { font-weight: 600; color: #1a3a4a; font-size: 15px; }
+  .cat-card small { color: #777; font-size: 12px; }
+
+  .brands-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .brand-tag {
+    background: white;
+    border: 1px solid #dde3e8;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0e7490;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  /* ── FORM RICHIESTA CATALOGO ── */
+  .form-section {
+    background: linear-gradient(135deg, #0e7490 0%, #1a3a4a 100%);
+    padding: 70px 20px;
+    color: white;
+  }
+
+  .form-section h2 { color: white; }
+  .form-section .section-sub { color: rgba(255,255,255,0.75); }
+
+  .form-box {
+    background: white;
+    border-radius: 14px;
+    padding: 40px;
+    max-width: 680px;
+    margin: auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #dde3e8;
+    border-radius: 7px;
+    font-size: 14px;
+    color: #222;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #0e7490;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-submit {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .btn-submit {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+  }
+
+  .btn-submit:hover { background: #1ebe5a; }
+
+  .form-note {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-top: 12px;
+  }
+
+  /* ── ZONA DI SERVIZIO ── */
+  .zone-section {
+    background: #f0f9ff;
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .zone-pills {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 20px 0 30px;
+  }
+
+  .zone-pill {
+    background: white;
+    border: 2px solid #0e7490;
+    color: #0e7490;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .zone-info {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── GALLERY ── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+
+  .gallery-grid img:hover { transform: scale(1.02); }
+
+  /* ── CONTATTI ── */
+  .contact-section {
+    background: white;
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+  }
+
+  .contact-card {
+    background: #f9fbfc;
+    border-radius: 12px;
+    padding: 28px 32px;
+    min-width: 200px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  }
+
+  .contact-card .c-icon { font-size: 32px; margin-bottom: 10px; }
+  .contact-card p { color: #444; font-size: 15px; }
+  .contact-card a { color: #0e7490; text-decoration: none; font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  footer strong { color: white; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <img src="Caruso Logo.png" alt="Caruso Distribuzione">
+  <a class="btn" href="https://wa.me/39360409623?text=Ciao%2C%20sono%20un%20ristoratore%20e%20vorrei%20ricevere%20il%20catalogo%20Caruso%20Distribuzione" target="_blank">
+    💬 WhatsApp
+  </a>
+</header>
+
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <img class="hero-img" src="IMG_8185.png" alt="Caruso Distribuzione consegne">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Caruso Distribuzione</h1>
+    <p>Qualità, velocità e affidabilità nelle province di Trapani e Palermo</p>
+    <p class="sub">Dal 1998 al fianco dei nostri clienti</p>
+    <div class="hero-btns">
+      <a class="btn btn-outline" href="#catalogo">Scopri i Prodotti</a>
+      <a class="btn" href="#richiedi-catalogo">Richiedi il Catalogo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ CHI SIAMO ══════════════ -->
+<section class="section" id="chi-siamo">
+  <div class="about-grid">
+    <div class="about-logo">
+      <img src="Caruso Logo.png" alt="Caruso Distribuzione Logo">
+    </div>
+    <div class="about-text">
+      <h3>Chi siamo</h3>
+      <p>
+        Caruso Distribuzione è un'azienda a conduzione familiare con sede ad <strong>Alcamo (TP)</strong>,
+        attiva dal <strong>1998</strong> nella distribuzione di ingredienti e prodotti alimentari
+        di alta qualità per i professionisti della ristorazione.
+      </p>
+      <p>
+        Serviamo ristoranti, pizzerie, bar e attività di catering nelle province di
+        <strong>Trapani</strong> e <strong>Palermo</strong>, con un servizio diretto, puntuale e
+        costruito su un rapporto di fiducia personale con ogni cliente.
+      </p>
+      <p>
+        Selezioniamo solo i migliori produttori italiani — da Caputo a Latteria Sorrentina,
+        da Parma Torre Antica a Costanza — per garantire ingredienti all'altezza delle
+        vostre cucine.
+      </p>
+      <div>
+        <span class="badge">🏠 Azienda familiare</span>
+        <span class="badge">📅 Dal 1998</span>
+        <span class="badge">🚚 Consegne rapide</span>
+        <span class="badge">🇮🇹 Prodotti italiani</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ PERCHÉ NOI ══════════════ -->
+<div class="why-section">
+  <h2>Perché scegliere Caruso Distribuzione</h2>
+  <p class="section-sub" style="max-width:600px; margin: 0 auto 35px;">
+    Oltre 25 anni di esperienza al servizio dei professionisti del gusto
+  </p>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Qualità selezionata</h3>
+      <p>Solo i migliori brand italiani, scelti uno per uno per garantire risultati eccellenti in cucina.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚚</div>
+      <h3>Consegne puntuali</h3>
+      <p>Servizio attivo dal lunedì al venerdì nelle province di Trapani e Palermo. Sempre in orario.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>Rapporto diretto</h3>
+      <p>Niente call center. Parli direttamente con noi, come si fa tra persone di fiducia.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📦</div>
+      <h3>Gamma completa</h3>
+      <p>Farine, mozzarelle, salumi, formaggi, salse, conserve e frutta secca: tutto in un unico fornitore.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════ CATALOGO PRODOTTI ══════════════ -->
+<section class="section" id="catalogo">
+  <h2>I Nostri Prodotti</h2>
+  <p class="section-sub">Una selezione d'eccellenza per i professionisti del gusto</p>
+
+  <div class="catalog-grid">
+    <div class="cat-card">
+      <div class="cat-icon">🌾</div>
+      <p>Le Farine</p>
+      <small>Caputo · Denti · Molino Bonura</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🧀</div>
+      <p>Le Mozzarelle</p>
+      <small>Latteria Sorrentina · Casearia Cioffi · La Daria</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🥩</div>
+      <p>I Salumi</p>
+      <small>Parma Torre Antica · Kofler · Leoncini · Fiorucci</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🧀</div>
+      <p>I Formaggi</p>
+      <small>Latteria Soresina · Bergader · Caseificio Locale</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🍅</div>
+      <p>Le Salse</p>
+      <small>Solania · Mutti · Ristoris · Heinz</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🫙</div>
+      <p>Le Conserve</p>
+      <small>Carbone · Alongi · Ristoris</small>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🥜</div>
+      <p>La Frutta Secca</p>
+      <small>Costanza</small>
+    </div>
+  </div>
+
+  <div class="brands-row">
+    <span class="brand-tag">Caputo</span>
+    <span class="brand-tag">Latteria Sorrentina</span>
+    <span class="brand-tag">Parma Torre Antica</span>
+    <span class="brand-tag">Kofler</span>
+    <span class="brand-tag">Mutti</span>
+    <span class="brand-tag">Solania</span>
+    <span class="brand-tag">Bergader</span>
+    <span class="brand-tag">Leoncini</span>
+    <span class="brand-tag">Costanza</span>
+    <span class="brand-tag">La Daria</span>
+    <span class="brand-tag">Heinz</span>
+    <span class="brand-tag">Ristoris</span>
+  </div>
+</section>
+
+
+<!-- ══════════════ GALLERY ══════════════ -->
+<section class="section" style="padding-top: 0;">
+  <h2>La Nostra Realtà</h2>
+  <p class="section-sub">Ogni giorno in strada per portare qualità nelle vostre cucine</p>
+  <div class="gallery-grid">
+    <img src="IMG_8185.png" alt="Consegna Caruso Distribuzione">
+    <img src="IMG_8183.png" alt="Magazzino Caruso Distribuzione">
+    <img src="IMG_8184.png" alt="Prodotti Caputo - Caruso Distribuzione">
+  </div>
+</section>
+
+
+<!-- ══════════════ FORM RICHIESTA CATALOGO ══════════════ -->
+<div class="form-section" id="richiedi-catalogo">
+  <h2>Richiedi il Catalogo</h2>
+  <p class="section-sub">Compila il modulo e ti contatteremo su WhatsApp con il catalogo completo e le migliori offerte</p>
+
+  <div class="form-box">
+    <form id="catalogForm" onsubmit="inviaRichiesta(event)">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nome">Nome e Cognome *</label>
+          <input type="text" id="nome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono / WhatsApp *</label>
+          <input type="tel" id="telefono" placeholder="+39 320 000 0000" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="azienda">Nome Attività *</label>
+          <input type="text" id="azienda" placeholder="Pizzeria da Mario" required>
+        </div>
+        <div class="form-group">
+          <label for="tipo">Tipo di Attività *</label>
+          <select id="tipo" required>
+            <option value="">Seleziona...</option>
+            <option>Ristorante</option>
+            <option>Pizzeria</option>
+            <option>Bar / Caffetteria</option>
+            <option>Pasticceria / Panificio</option>
+            <option>Catering / Banqueting</option>
+            <option>Hotel / Struttura ricettiva</option>
+            <option>Altro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="citta">Città *</label>
+        <input type="text" id="citta" placeholder="Alcamo, Trapani, Palermo..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="prodotti">Prodotti di interesse</label>
+        <select id="prodotti">
+          <option value="">Tutti i prodotti</option>
+          <option>Farine</option>
+          <option>Mozzarelle e Latticini</option>
+          <option>Salumi</option>
+          <option>Formaggi</option>
+          <option>Salse e Conserve</option>
+          <option>Frutta Secca</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note aggiuntive</label>
+        <textarea id="note" placeholder="Scrivi qui eventuali richieste specifiche o domande..."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-submit">💬 Invia Richiesta via WhatsApp</button>
+      </div>
+      <p class="form-note">I tuoi dati verranno utilizzati esclusivamente per rispondere alla tua richiesta.</p>
+    </form>
+  </div>
+</div>
+
+
+<!-- ══════════════ ZONA DI SERVIZIO ══════════════ -->
+<div class="zone-section">
+  <h2>Zona di Servizio</h2>
+  <p class="section-sub">Consegniamo direttamente a domicilio nelle seguenti province</p>
+  <div class="zone-pills">
+    <span class="zone-pill">📍 Provincia di Trapani</span>
+    <span class="zone-pill">📍 Provincia di Palermo</span>
+  </div>
+  <p class="zone-info">
+    🗓️ Consegne dal <strong>lunedì al venerdì</strong><br>
+    📦 Ordini ricevuti entro le 18:00 vengono processati il giorno successivo<br>
+    📞 Per info sulla tua zona: <a href="tel:+39360409623" style="color:#0e7490; font-weight:600;">+39 360 409 623</a>
+  </p>
+</div>
+
+
+<!-- ══════════════ CONTATTI ══════════════ -->
+<section class="contact-section" id="contatti">
+  <h2>Contattaci</h2>
+  <p class="section-sub">Siamo a tua disposizione per qualsiasi informazione</p>
+
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="c-icon">📞</div>
+      <p><a href="tel:+39360409623">+39 360 409 623</a></p>
+    </div>
+    <div class="contact-card">
+      <div class="c-icon">📧</div>
+      <p><a href="mailto:infocarusodistribuzione@gmail.com">infocarusodistribuzione@gmail.com</a></p>
+    </div>
+    <div class="contact-card">
+      <div class="c-icon">📍</div>
+      <p>Via Antonio Vivaldi, 19<br>91011 Alcamo (TP)</p>
+    </div>
+  </div>
+
+  <a class="btn" href="https://wa.me/39360409623?text=Ciao%2C%20sono%20un%20ristoratore%20interessato%20ai%20vostri%20prodotti.%20Nome%20attivit%C3%A0%3A%20____%20Citt%C3%A0%3A%20____" target="_blank">
+    💬 Scrivici su WhatsApp
+  </a>
+</section>
+
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <strong>Caruso Distribuzione</strong> — Ingrosso Alimentare<br>
+  Via Antonio Vivaldi, 19 · 91011 Alcamo (TP)<br>
+  P.IVA: 01767360819<br><br>
+  © 2026 Caruso Distribuzione · Tutti i diritti riservati
+</footer>
+
+
+<!-- ══════════════ SCRIPT FORM ══════════════ -->
+<script>
+  function inviaRichiesta(e) {
+    e.preventDefault();
+
+    const nome     = document.getElementById('nome').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const azienda  = document.getElementById('azienda').value.trim();
+    const tipo     = document.getElementById('tipo').value;
+    const citta    = document.getElementById('citta').value.trim();
+    const prodotti = document.getElementById('prodotti').value || 'Tutti i prodotti';
+    const note     = document.getElementById('note').value.trim();
+
+    let msg = `Ciao! Vorrei ricevere il catalogo Caruso Distribuzione.
+
+`;
+    msg += `👤 Nome: ${nome}
+`;
+    msg += `📱 Telefono: ${telefono}
+`;
+    msg += `🏪 Attività: ${azienda} (${tipo})
+`;
+    msg += `📍 Città: ${citta}
+`;
+    msg += `📦 Prodotti di interesse: ${prodotti}
+`;
+    if (note) msg += `📝 Note: ${note}
+`;
+
+    const url = `https://wa.me/39360409623?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+</script>
+
+</body>
+</html>
+
